@@ -58,7 +58,6 @@ class BukuController extends Controller
         $buku->author = $request->input('author');
         $buku->description = $request->input('description');
     
-
         $buku->save();
 
         return redirect()->route('buku.index');
