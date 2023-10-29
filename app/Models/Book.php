@@ -9,6 +9,6 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $table = 'books'; // Nama tabel yang sesuai
+    protected $table = 'books';
     protected $fillable = ['title', 'author', 'description'];
 }
