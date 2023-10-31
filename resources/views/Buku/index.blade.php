@@ -24,7 +24,6 @@
                     <th>Judul</th>
                     <th>Penulis</th>
                     <th>Deskripsi</th>
-                    <th>Detail</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -32,12 +31,10 @@
                 @foreach ($buku as $item)
                 <tr>
                     <td>{{ $item->title }}</td>
-                    <td>{{ $item->author }}</td>
+                    <td>{{ $item->penulis->nama_penulis ?? 'Data Tidak Ada' }}</td>
                     <td>{{ $item->description }}</td>
                     <td>
                       <a href="{{ route('buku.show', [$item->id]) }}" class="btn btn-success">Detail</a>
-                    </td>
-                    <td>
                       <a href="{{ route('buku.edit', [$item->id]) }}" class="btn btn-primary">Edit</a>
                       <form action="{{ route('buku.destroy', [$item->id]) }}" method="POST">
                         @csrf
@@ -50,6 +47,6 @@
             </tbody>
         </table>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -10,5 +10,10 @@ class Book extends Model
     use HasFactory;
 
     protected $table = 'books';
-    protected $fillable = ['title', 'author', 'description'];
+    protected $fillable = ['title', 'penulis_id', 'description'];
+
+    public function penulis()
+    {
+        return $this->belongsTo(Penulis::class, 'penulis_id');
+    }
 }

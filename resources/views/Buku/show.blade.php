@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Judul: {{ $buku->title }}</h2>
-                <p class="card-text">Penulis: {{ $buku->author }}</p>
+                <p class="card-text">Penulis: {{ $buku->penulis->nama_penulis ?? 'Data Tidak Ada' }}</p> <!-- Mengakses nama penulis melalui relasi -->
                 <p class="card-text">Deskripsi: {{ $buku->description }}</p>
             </div>
         </div>

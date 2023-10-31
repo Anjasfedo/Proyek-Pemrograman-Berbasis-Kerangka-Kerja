@@ -19,9 +19,14 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="inputAuthor" class="form-label">Nama Penulis</label>
-                    <input type="text" class="form-control" id="inputAuthor" name="author" value="{{ old('author') }}">
-                    @error('author')
+                    <label for="inputPenulis" class="form-label">Penulis</label>
+                    <select class="form-control" id="inputPenulis" name="penulis_id">
+                        <option value="">Pilih Penulis</option>
+                        @foreach ($penulis as $penulisItem)
+                            <option value="{{ $penulisItem->id }}">{{ $penulisItem->nama_penulis }}</option>
+                        @endforeach
+                    </select>
+                    @error('penulis_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
