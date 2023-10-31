@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Book;
+use App\Models\Penulis;
 
 class BukuController extends Controller
 {
@@ -15,7 +15,7 @@ class BukuController extends Controller
     {
         $buku = Book::all();
     
-        return view('Buku.index', compact('buku'))->with('pesan', 'berhasil ditambahkan');
+        return view('Buku.index', compact('buku'));
     }
     
 
@@ -24,8 +24,11 @@ class BukuController extends Controller
      */
     public function create()
     {
-        return view('Buku.create');
+        $penulis = Penulis::all(); // Mengambil daftar penulis dari model Penulis
+    
+        return view('Buku.create', compact('penulis'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -34,47 +37,29 @@ class BukuController extends Controller
     {
         $request->validate([
             'title' => 'required|min:5|max:12|unique:books',
-            'author' => 'required|min:5',
+            'penulis_id' => 'required|exists:penulis,id',
             'description' => 'nullable|min:5',
         ], [
             'title.required' => 'Judul wajib diisi.',
             'title.min' => 'Judul minimal harus memiliki 5 karakter.',
             'title.max' => 'Judul tidak boleh lebih dari 12 karakter.',
             'title.unique' => 'Judul sudah ada dalam database.',
-            'author.required' => 'Penulis wajib diisi.',
-            'author.min' => 'Penulis minimal harus memiliki 5 karakter.',
+            'penulis_id.required' => 'Penulis wajib diisi.',
+            'penulis_id.exists' => 'Penulis tidak valid.',
             'description.min' => 'Deskripsi minimal harus memiliki 5 karakter.',
         ]);
     
-        // Book::create([
-        //     'title' => $request->input('title'),
-        //     'author' => $request->input('author'),
-        //     'description' => $request->input('description'),
-        // ]);
+        Book::create($request->all());
 
-        $buku = new Book;
-
-        $buku->title = $request->input('title');
-        $buku->author = $request->input('author');
-        $buku->description = $request->input('description');
-    
-        $buku->save();
-
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with('pesan', 'Buku berhasil ditambahkan');
     }
     
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Book $buku)
     {
-        $buku = Book::find($id);
-    
-        if (!$buku) {
-            return redirect()->route('index')->with('error', 'Buku tidak ditemukan'); // Redirect jika buku tidak ditemukan
-        }
-    
         return view('Buku.show', compact('buku'));
     }
     
@@ -82,48 +67,34 @@ class BukuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Book $buku)
     {
-        $buku = Book::find($id);
+        $penulis = Penulis::all(); // Mengambil daftar penulis dari model Penulis
     
-        if (!$buku) {
-            return redirect()->route('index')->with('error', 'Buku tidak ditemukan');
-        }
-    
-        return view('Buku.edit', compact('buku'));
+        return view('Buku.edit', compact('buku', 'penulis'));
     }
     
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Book $buku)
     {
-        $buku = Book::find($id);
-
-        if (!$buku) {
-            return redirect()->route('index')->with('error', 'Buku tidak ditemukan');
-        }
-
         $request->validate([
             'title' => 'required|min:5|max:12|unique:books,title,' . $buku->id,
-            'author' => 'required|min:5',
+            'penulis_id' => 'required|exists:penulis,id',
             'description' => 'nullable|min:5',
         ], [
             'title.required' => 'Judul wajib diisi.',
             'title.min' => 'Judul minimal harus memiliki 5 karakter.',
             'title.max' => 'Judul tidak boleh lebih dari 12 karakter.',
             'title.unique' => 'Judul sudah ada dalam database.',
-            'author.required' => 'Penulis wajib diisi.',
-            'author.min' => 'Penulis minimal harus memiliki 5 karakter.',
+            'penulis_id.required' => 'Penulis wajib diisi.',
+            'penulis_id.exists' => 'Penulis tidak valid.',
             'description.min' => 'Deskripsi minimal harus memiliki 5 karakter.',
         ]);
 
-        $buku->title = $request->input('title');
-        $buku->author = $request->input('author');
-        $buku->description = $request->input('description');
-
-        $buku->save();
+        $buku->update($request->all());
 
         return redirect()->route('buku.index')->with('pesan', 'Buku berhasil diperbarui');
     }
@@ -131,16 +102,11 @@ class BukuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Book $buku)
     {
-        $buku = Book::find($id);
+        $buku->delete();
 
-    if (!$buku) {
-        return redirect()->route('index')->with('error', 'Buku tidak ditemukan');
-    }
-
-    $buku->delete();
-
-    return redirect()->route('buku.index')->with('pesan', 'Buku berhasil dihapus');
+        return redirect()->route('buku.index')->with('pesan', 'Buku berhasil dihapus');
     }
 }
+

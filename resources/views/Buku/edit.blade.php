@@ -23,14 +23,28 @@
             <div class="mb-3">
                 <label for="inputTitle" class="form-label">Judul</label>
                 <input type="text" class="form-control" id="inputTitle" name="title" value="{{ $buku->title }}">
+                @error('title')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
-                <label for="inputAuthor" class="form-label">Nama Penulis</label>
-                <input type="text" class="form-control" id="inputAuthor" name="author" value="{{ $buku->author }}">
+                <label for="inputPenulis" class="form-label">Penulis</label>
+                <select class="form-control" id="inputPenulis" name="penulis_id">
+                    <option value="">Pilih Penulis</option>
+                    @foreach ($penulis as $penulisItem)
+                        <option value="{{ $penulisItem->id }}" @if ($penulisItem->id == $buku->penulis_id) selected @endif>{{ $penulisItem->nama_penulis }}</option>
+                    @endforeach
+                </select>
+                @error('penulis_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="inputDescription" class="form-label">Deskripsi</label>
                 <textarea class="form-control" id="inputDescription" name="description">{{ $buku->description }}</textarea>
+                @error('description')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>

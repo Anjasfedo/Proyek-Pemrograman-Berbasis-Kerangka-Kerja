@@ -11,4 +11,9 @@ class Penulis extends Model
 
     protected $table = 'penulis';
     protected $fillable = ['nama_penulis', 'nama_pena', 'jenis_kelamin', 'tanggal_lahir', 'tempat_lahir'];
+
+    public function books()
+    {
+        return $this->hasMany(Book::class, 'penulis_id');
+    }
 }
