@@ -16,7 +16,7 @@
         </div>
         @endif
 
-        <a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah</a>
+        <a href="{{ route('book.create') }}" class="btn btn-primary">Tambah</a>
 
         <table class="table">
             <thead>
@@ -28,15 +28,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($buku as $item)
+                @foreach ($dataBooks as $item)
                 <tr>
                     <td>{{ $item->title }}</td>
-                    <td>{{ $item->penulis->nama_penulis ?? 'Data Tidak Ada' }}</td>
+                    <td>{{ $item->author->author_name ?? 'Data Tidak Ada' }}</td> <!-- Menggunakan 'author' untuk mengakses relasi -->
                     <td>{{ $item->description }}</td>
                     <td>
-                      <a href="{{ route('buku.show', [$item->id]) }}" class="btn btn-success">Detail</a>
-                      <a href="{{ route('buku.edit', [$item->id]) }}" class="btn btn-primary">Edit</a>
-                      <form action="{{ route('buku.destroy', [$item->id]) }}" method="POST">
+                      <a href="{{ route('book.show', [$item->id]) }}" class="btn btn-success">Detail</a>
+                      <a href="{{ route('book.edit', [$item->id]) }}" class="btn btn-primary">Edit</a>
+                      <form action="{{ route('book.destroy', [$item->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus buku ini?')">Hapus</button>

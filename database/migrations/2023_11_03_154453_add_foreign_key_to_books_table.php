@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\Penulis::class, 'penulis_id')->nullable()->after('id')->constrained()->onUpdate('cascade')->onDelete('set null');
+            $table->foreignIdFor(\App\Models\Author::class, 'author_id')->nullable()->after('id')->constrained()->onUpdate('cascade')->onDelete('set null');
         });
     }
 
@@ -22,9 +22,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('books', function (Blueprint $table) {
-            // Menghapus foreign key dan kolom penulis_id
-            $table->dropForeign(['penulis_id']);
-            $table->dropColumn('penulis_id');
+            $table->dropForeign(['author_id']);
+            $table->dropColumn('author_id');
         });
     }
 };

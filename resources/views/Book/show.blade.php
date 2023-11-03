@@ -12,13 +12,13 @@
 
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title">Judul: {{ $buku->title }}</h2>
-                <p class="card-text">Penulis: {{ $buku->penulis->nama_penulis ?? 'Data Tidak Ada' }}</p> <!-- Mengakses nama penulis melalui relasi -->
-                <p class="card-text">Deskripsi: {{ $buku->description }}</p>
+                <h2 class="card-title">Judul: {{ $dataBook->title }}</h2>
+                <p class="card-text">Penulis: {{ $dataBook->author->author_name ?? 'Data Tidak Ada' }}</p> <!-- Menggunakan 'author' untuk mengakses relasi -->
+                <p class="card-text">Deskripsi: {{ $dataBook->description }}</p>
             </div>
         </div>
 
-        <a href="{{ route('buku.index') }}" class="btn btn-primary mt-3">Kembali</a>
+        <a href="{{ route('book.index') }}" class="btn btn-primary mt-3">Kembali</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
