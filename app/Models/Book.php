@@ -10,10 +10,10 @@ class Book extends Model
     use HasFactory;
 
     protected $table = 'books';
-    protected $fillable = ['title', 'penulis_id', 'description'];
+    protected $fillable = ['title', 'author_id', 'description']; // Ganti 'penulis_id' menjadi 'author_id'
 
-    public function penulis()
+    public function author()
     {
-        return $this->belongsTo(Penulis::class, 'penulis_id');
+        return $this->belongsTo(Author::class, 'author_id'); // Ganti 'Penulis' menjadi 'Author'
     }
 }

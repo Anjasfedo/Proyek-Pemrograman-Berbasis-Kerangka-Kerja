@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\BukuController;
-use App\Http\Controllers\PenulisController;
+
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthorController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,6 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/mahasiswa/{npm}', [MahasiswaController::class, 'index']);
 
-Route::resource('/buku', BukuController::class);
+Route::resource('/book', BookController::class);
 
-Route::resource('/penulis', PenulisController::class);
+Route::resource('/author', AuthorController::class);

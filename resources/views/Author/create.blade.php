@@ -12,47 +12,47 @@
 
         <div class="card mx-auto">
             <div class="card-body">
-                <form action="{{ route('penulis.store') }}" method="POST">
+                <form action="{{ route('author.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="inputNamaPenulis" class="form-label">Nama Penulis</label>
-                        <input type="text" class="form-control" id="inputNamaPenulis" name="nama_penulis" value="{{ old('nama_penulis') }}">
-                        @error('nama_penulis')
+                        <input type="text" class="form-control" id="inputNamaPenulis" name="author_name" value="{{ old('author_name') }}">
+                        @error('author_name')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for "inputNamaPena" class="form-label">Nama Pena</label>
-                        <input type="text" class="form-control" id="inputNamaPena" name="nama_pena" value="{{ old('nama_pena') }}">
-                        @error('nama_pena')
+                        <label for="inputNamaPena" class="form-label">Nama Pena</label>
+                        <input type="text" class="form-control" id="inputNamaPena" name="pen_name" value="{{ old('pen_name') }}">
+                        @error('pen_name')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="inputJenisKelamin" class="form-label">Jenis Kelamin</label>
-                        <select class="form-select" id="inputJenisKelamin" name="jenis_kelamin">
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                        <select class="form-select" id="inputJenisKelamin" name="gender">
+                            <option value="Male">Laki-laki</option>
+                            <option value="Female">Perempuan</option>
                         </select>
-                        @error('jenis_kelamin')
+                        @error('gender')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="inputTanggalLahir" class="form-label">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="inputTanggalLahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
-                        @error('tanggal_lahir')
+                        <input type="date" class="form-control" id="inputTanggalLahir" name="date_of_birth" value="{{ old('date_of_birth') }}">
+                        @error('date_of_birth')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="inputTempatLahir" class="form-label">Tempat Lahir</label>
-                        <input type="text" class="form-control" id="inputTempatLahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}">
-                        @error('tempat_lahir')
+                        <input type="text" class="form-control" id="inputTempatLahir" name="place_of_birth" value="{{ old('place_of_birth') }}">
+                        @error('place_of_birth')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <a href="{{ route('penulis.index') }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('author.index') }}" class="btn btn-primary">Kembali</a>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
