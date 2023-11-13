@@ -6,6 +6,9 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,7 +23,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::resource('/', HomeController::class);
+
+// Route::resource('/', \App\Http\Controllers\HomeController::class);
+
+Route::resource('/posts', PostController::class);
+Route::resource('/comments', CommentController::class)->except('create');
+Route::get('comments/create/{id}', [CommentController::class, 'create'])->name('comments.create');
 
 Route::get('/mahasiswa/{npm}', [MahasiswaController::class, 'index']);
 
