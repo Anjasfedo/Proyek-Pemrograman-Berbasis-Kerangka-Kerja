@@ -33,7 +33,7 @@ Route::get('comments/create/{id}', [CommentController::class, 'create'])->name('
 
 Route::get('/mahasiswa/{npm}', [MahasiswaController::class, 'index']);
 
-Route::resource('/book', BookController::class);
+
 
 Route::resource('/author', AuthorController::class);
 Auth::routes();
@@ -47,4 +47,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+});
+
+Route::middleware('role:admin')->group(function () {
+    //semua route untuk admin disini
+    Route::resource('/book', BookController::class);
+});
+
+Route::middleware('role:user')->group(function () {
+    //semua route untuk user disini
 });
